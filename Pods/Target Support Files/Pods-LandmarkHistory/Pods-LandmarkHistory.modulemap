@@ -1,6 +1,0 @@
-framework module Pods_LandmarkHistory {
-  umbrella header "Pods-LandmarkHistory-umbrella.h"
-
-  export *
-  module * { export * }
-}
