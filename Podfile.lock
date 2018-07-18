@@ -52,6 +52,7 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.6.0)
+  - SwiftSoup (1.7.1)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
@@ -59,6 +60,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/MLVision
   - Kingfisher
+  - SwiftSoup
   - SwiftyJSON (~> 4.1)
 
 SPEC REPOS:
@@ -77,6 +79,7 @@ SPEC REPOS:
     - Kingfisher
     - nanopb
     - Protobuf
+    - SwiftSoup
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -94,8 +97,9 @@ SPEC CHECKSUMS:
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
+  SwiftSoup: 277f7ef548826e0ca7603a06b30d4a5df3ee0587
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: bb936c377f2cdb6855c3429f18a509b82a9d706c
+PODFILE CHECKSUM: 02de65518c1652db642f258491a93ae3d0759b22
 
 COCOAPODS: 1.5.3

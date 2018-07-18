@@ -11,5 +11,6 @@ target 'LandmarkHistory' do
   pod 'Kingfisher'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.1'
+  pod 'SwiftSoup'
 
 end

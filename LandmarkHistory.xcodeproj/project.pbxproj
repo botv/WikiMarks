@@ -16,6 +16,9 @@
 		84D9250920FD226900100209 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D9250720FD226800100209 /* Main.storyboard */; };
 		BD57EE322D0E9D595ABBCE4B /* Pods_LandmarkHistory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166E715C4898C5203C4BE1F2 /* Pods_LandmarkHistory.framework */; };
 		BE5481FC20FD093500FFFFC6 /* LandmarkInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5481FB20FD093500FFFFC6 /* LandmarkInfoViewController.swift */; };
+		FA18945120FF0A5C00357F2D /* ImageWindowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */; };
+		FA18945320FF111B00357F2D /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18945220FF111B00357F2D /* InfoCell.swift */; };
+		FABE11D920FD377D007C79EE /* LandmarkInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE11D820FD377D007C79EE /* LandmarkInfoService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		BE5481FB20FD093500FFFFC6 /* LandmarkInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkInfoViewController.swift; sourceTree = "<group>"; };
 		E111E9A461FF35930E089E65 /* Pods-LandmarkHistory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LandmarkHistory.release.xcconfig"; path = "Pods/Target Support Files/Pods-LandmarkHistory/Pods-LandmarkHistory.release.xcconfig"; sourceTree = "<group>"; };
 		F58CD7CCCE33DFF39D218C43 /* Pods-LandmarkHistory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LandmarkHistory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LandmarkHistory/Pods-LandmarkHistory.debug.xcconfig"; sourceTree = "<group>"; };
+		FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWindowCell.swift; sourceTree = "<group>"; };
+		FA18945220FF111B00357F2D /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		FABE11D820FD377D007C79EE /* LandmarkInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkInfoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,7 @@
 		844EF41120FD0485005F6A91 /* LandmarkHistory */ = {
 			isa = PBXGroup;
 			children = (
+				FA18944F20FF0A3600357F2D /* Views */,
 				84D9250120FD221500100209 /* Storyboards */,
 				84D924ED20FD175900100209 /* Services */,
 				BE54820420FD0AEE00FFFFC6 /* Controllers */,
@@ -90,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				84D924EE20FD176800100209 /* MLKitService.swift */,
+				FABE11D820FD377D007C79EE /* LandmarkInfoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -127,6 +135,15 @@
 				166E715C4898C5203C4BE1F2 /* Pods_LandmarkHistory.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA18944F20FF0A3600357F2D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */,
+				FA18945220FF111B00357F2D /* InfoCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +229,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftSoup/SwiftSoup.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -223,6 +241,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSoup.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -257,9 +276,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE5481FC20FD093500FFFFC6 /* LandmarkInfoViewController.swift in Sources */,
+				FA18945120FF0A5C00357F2D /* ImageWindowCell.swift in Sources */,
 				844EF41520FD0485005F6A91 /* CameraViewController.swift in Sources */,
+				FABE11D920FD377D007C79EE /* LandmarkInfoService.swift in Sources */,
 				844EF41320FD0485005F6A91 /* AppDelegate.swift in Sources */,
 				84D924EF20FD176800100209 /* MLKitService.swift in Sources */,
+				FA18945320FF111B00357F2D /* InfoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

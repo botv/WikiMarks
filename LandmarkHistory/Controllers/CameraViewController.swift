@@ -15,6 +15,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +29,12 @@ class CameraViewController: UIViewController {
         
         if identifier == "toLandmarkInfo" {
             print("Transitioning to info page")
+            LandmarkInfoService.getInformation(for: "Golden Gate Bridge") { information in
+                if let info = information {
+                    let destination = segue.destination as! LandmarkInfoViewController
+                    destination.info = info
+                }
+            }
         }
     }
     
