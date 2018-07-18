@@ -6,7 +6,6 @@
 //  Copyright © 2018 Ben Botvinick. All rights reserved.
 //
 
-import Alamofire
 import SwiftyJSON
 import SwiftSoup
 

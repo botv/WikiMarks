@@ -18,6 +18,7 @@ class LandmarkInfoViewController: UIViewController {
     @IBOutlet weak var infoTableView: UITableView!
     @IBOutlet weak var landmarkTitle: UILabel!
     var info: [String: Any]?
+    var cellTypes = [String]()
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -27,7 +28,11 @@ class LandmarkInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        if let info = info,
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if var info = info,
             let url = info["image"],
             let title = info["Official name"],
             let titleText = title as? String {
@@ -36,7 +41,6 @@ class LandmarkInfoViewController: UIViewController {
             print(url)
             landmarkImage.kf.setImage(with: imageURL)
         }
-        infoTableView.reloadData()
     }
     
 
@@ -49,27 +53,37 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let info = info else { return 0 }
-        
-        return info.count
+        guard var newInfo = info else { return 0 }
+        newInfo.removeValue(forKey: "image")
+        newInfo.removeValue(forKey: "Official name")
+        return newInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.row == 0 {
-            print("image window cell")
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageWindowCell") as! ImageWindowCell
-            
+            cellTypes.append("image")
             
             
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell") as! InfoCell
             
-            if let info = info {
-                cell.infoTitle.text = Array(info)[indexPath.row].key
-                if let value = Array(info)[indexPath.row].value as? String {
-                    cell.infoLabel.text = value
+            if var newInfo = info {
+                newInfo.removeValue(forKey: "image")
+                newInfo.removeValue(forKey: "Official name")
+                if let value = Array(newInfo)[indexPath.row].value as? String {
+                    if value.count <= 20 {
+                        cell.infoTitle.text = Array(newInfo)[indexPath.row].key
+                        cell.infoLabel.text = value
+                        cellTypes.append("short")
+                    } else {
+                        let longCell = tableView.dequeueReusableCell(withIdentifier: "LongInfoCell") as! LongInfoCell
+                        longCell.infoTitle.text = Array(newInfo)[indexPath.row].key
+                        longCell.infoLabel.text = value
+                        cellTypes.append("long")
+                        return longCell
+                    }
                 }
             }
             
@@ -81,7 +95,11 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
         if indexPath.row == 0 {
             return 200
         } else {
-            return 77
+            if cellTypes[indexPath.row] == "long" {
+                return 120
+            } else {
+                return 77
+            }
         }
     }
 }
