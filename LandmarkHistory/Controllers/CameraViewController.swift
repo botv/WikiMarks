@@ -19,6 +19,8 @@ class CameraViewController: UIViewController {
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
     var image: UIImage?
+    var landmark: String?
+    var findingLandmark = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,14 +82,18 @@ class CameraViewController: UIViewController {
     }
     
     @IBAction func cameraButtonTapped(_ sender: Any) {
-        let settings = AVCapturePhotoSettings()
-        photoOutput?.capturePhoto(with: settings, delegate: self)
+        if (!findingLandmark) {
+            print("processing")
+            findingLandmark = true;
+            let settings = AVCapturePhotoSettings()
+            photoOutput?.capturePhoto(with: settings, delegate: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toLandmarkInfo" {
             let landmarkInfoViewController = segue.destination as! LandmarkInfoViewController
-            landmarkInfoViewController.landmark = "Golden Gate Bridge"
+            landmarkInfoViewController.landmark = landmark
         }
     }
 }
@@ -96,7 +102,19 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if let imageData = photo.fileDataRepresentation() {
             image = UIImage(data: imageData)
-            performSegue(withIdentifier: "toLandmarkInfo", sender: nil)
+            MLService.evaluateImage(for: image!) { landmarks in
+                if landmarks.isEmpty {
+                    print("no landmarks found")
+                    self.findingLandmark = false
+                    return
+                }
+                
+                self.landmark = landmarks[0].landmark
+                print("landmark found: " + self.landmark!)
+                
+                self.performSegue(withIdentifier: "toLandmarkInfo", sender: nil)
+                self.findingLandmark = false
+            }
         }
     }
 }

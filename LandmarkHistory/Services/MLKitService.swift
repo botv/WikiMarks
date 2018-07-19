@@ -10,22 +10,19 @@ import UIKit
 import Firebase
 
 struct MLService {
-    static func evaluateImage(for uiImage: UIImage) {
+    static func evaluateImage(for uiImage: UIImage, completion: @escaping ([VisionCloudLandmark]) -> Void) {
         let vision = Vision.vision()
         let cloudDetector = vision.cloudLandmarkDetector()
         
         let visionImage = VisionImage(image: uiImage)
         
         cloudDetector.detect(in: visionImage) { landmarks, error in
-            guard error == nil, let landmarks = landmarks, !landmarks.isEmpty else {
+            guard error == nil, let landmarks = landmarks else {
                 print("landmark detection failed")
                 return
             }
             
-            for landmark in landmarks {
-                let landmarkDesc = landmark.landmark
-                print("detected landmark: " + landmarkDesc!)
-            }
+            completion(landmarks)
         }
     }
 }

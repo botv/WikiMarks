@@ -20,7 +20,6 @@ class LandmarkInfoViewController: UIViewController {
     var info: [String: Any]?
     var cellLengths = [Int]()
     var cellWidth: Int?
-    var landmark: String?
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
