@@ -29,12 +29,8 @@ class CameraViewController: UIViewController {
         
         if identifier == "toLandmarkInfo" {
             print("Transitioning to info page")
-            LandmarkInfoService.getInformation(for: "Golden Gate Bridge") { information in
-                if let info = information {
-                    let destination = segue.destination as! LandmarkInfoViewController
-                    destination.info = info
-                }
-            }
+            let destination = segue.destination as! LandmarkInfoViewController
+            destination.landmark = "Golden Gate Bridge"
         }
     }
     

@@ -109,8 +109,58 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="infoLabel" destination="3Lh-xC-sfx" id="UW5-bw-U2V"/>
-                                            <outlet property="infoTitle" destination="pxF-6l-vlh" id="eNi-rQ-SwE"/>
+                                            <outlet property="infoLabel" destination="3Lh-xC-sfx" id="sz1-fS-FDd"/>
+                                            <outlet property="infoTitle" destination="pxF-6l-vlh" id="xp3-yp-Zqt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WikilinkCell" rowHeight="68" id="DiE-pN-vUC" customClass="WikilinkCell" customModule="LandmarkHistory" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="247" width="375" height="68"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DiE-pN-vUC" id="myq-zK-GqS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3ac-i9-WWe">
+                                                    <rect key="frame" x="15" y="11" width="345" height="46"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wikipedia Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pe1-Sd-r1S">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="46"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="150" id="Z7c-pm-AkU"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xT-5r-NoH">
+                                                            <rect key="frame" x="150" y="0.0" width="195" height="46"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.60392156860000001" green="0.60392156860000001" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="2xT-5r-NoH" firstAttribute="top" secondItem="3ac-i9-WWe" secondAttribute="top" id="JAO-eb-BLN"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2xT-5r-NoH" secondAttribute="trailing" id="KeA-BH-6jF"/>
+                                                        <constraint firstItem="2xT-5r-NoH" firstAttribute="leading" secondItem="Pe1-Sd-r1S" secondAttribute="trailing" id="QKG-60-AUN"/>
+                                                        <constraint firstItem="Pe1-Sd-r1S" firstAttribute="top" secondItem="3ac-i9-WWe" secondAttribute="top" id="Tc0-xR-3aH"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Pe1-Sd-r1S" secondAttribute="bottom" id="dks-bq-BrM"/>
+                                                        <constraint firstItem="Pe1-Sd-r1S" firstAttribute="leading" secondItem="3ac-i9-WWe" secondAttribute="leading" id="gNP-JQ-YWD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="2xT-5r-NoH" secondAttribute="bottom" id="n7c-fM-WER"/>
+                                                        <constraint firstItem="2xT-5r-NoH" firstAttribute="leading" secondItem="Pe1-Sd-r1S" secondAttribute="trailing" id="ynB-Mw-pHH"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3ac-i9-WWe" firstAttribute="top" secondItem="myq-zK-GqS" secondAttribute="topMargin" id="NSM-Sn-0kG"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="3ac-i9-WWe" secondAttribute="trailing" id="Rnv-ql-tUU"/>
+                                                <constraint firstItem="3ac-i9-WWe" firstAttribute="leading" secondItem="myq-zK-GqS" secondAttribute="leadingMargin" id="jrY-di-U44"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="3ac-i9-WWe" secondAttribute="bottom" id="n1c-4d-YDm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="myView" destination="myq-zK-GqS" id="Kgc-Pv-rjj"/>
+                                            <outlet property="wikiLinkLabel" destination="2xT-5r-NoH" id="loZ-KF-eb4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
