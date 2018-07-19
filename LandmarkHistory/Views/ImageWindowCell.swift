@@ -8,7 +8,6 @@
 import UIKit
 
 class ImageWindowCell: UITableViewCell {
-    static let height: CGFloat = 120
     
     override func awakeFromNib() {
         super.awakeFromNib()

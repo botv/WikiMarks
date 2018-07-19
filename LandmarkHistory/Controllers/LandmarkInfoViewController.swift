@@ -17,9 +17,11 @@ class LandmarkInfoViewController: UIViewController {
     @IBOutlet weak var landmarkImage: UIImageView!
     @IBOutlet weak var infoTableView: UITableView!
     @IBOutlet weak var landmarkTitle: UILabel!
+    @IBOutlet weak var landmarkTitleView: UIView!
     var info: [String: Any]?
     var cellLengths = [Int]()
     var cellWidth: Int?
+    var themeColor: UIColor?
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -33,6 +35,17 @@ class LandmarkInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let gradient: CAGradientLayer = CAGradientLayer()
+        
+        let color = themeColor?.cgColor ?? UIColor.white.cgColor
+        gradient.colors = [color, color.copy(alpha: 0)]
+        gradient.locations = [0.57 , 0.9]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.frame = CGRect(x: 0.0, y: 0.0, width: landmarkTitle.frame.size.width, height: landmarkTitleView.frame.size.height)
+        
+        landmarkTitleView.layer.insertSublayer(gradient, at: 0)
+        
         if let landmark = landmark {
             LandmarkInfoService.getInformation(for: landmark) { information in
                 if let information = information {
@@ -42,16 +55,21 @@ class LandmarkInfoViewController: UIViewController {
         }
         if var info = info,
             let url = info["image"],
-            let title = info["Official name"],
-            let titleText = title as? String {
-            landmarkTitle.text = titleText
-            let imageURL = URL(string: url as! String)
-            print(url)
+            let title = landmark {
+            landmarkTitle.text = title
+            guard let imageURL = URL(string: url as! String) else { return }
             landmarkImage.kf.setImage(with: imageURL)
+//            var img: UIImage? = nil
+//            KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil) {image, error, cacheType, imageURL in
+//                img = image
+//            }
+//            if let img = img {
+//                let scaleFactor = CGFloat(UIScreen.main.bounds.width) / CGFloat(img.size.width)
+//                landmarkImage.frame = CGRect (x: 0, y: 62, width: (scaleFactor * img.size.width)/2, height: (scaleFactor * img.size.height)/2)
+//                landmarkImage.image = img
+//            }
         }
     }
-    
-
 }
 
 extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegate {
@@ -115,7 +133,7 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
             newInfo = newInfoTemp
         }
         if indexPath.row == 0 {
-            return 200
+            return 500
         } else if let newerInfo = newInfo,
             indexPath.row == Array(newerInfo).count {
             return 60
