@@ -7,15 +7,71 @@
 //
 
 import UIKit
+import AVFoundation
 
 class CameraViewController: UIViewController {
-
-    @IBOutlet weak var testSegueButton: UIButton!
+    
+    var captureSession = AVCaptureSession()
+    var backCamera: AVCaptureDevice?
+    var frontCamera: AVCaptureDevice?
+    var currentCamera: AVCaptureDevice?
+    var photoOutput: AVCapturePhotoOutput?
+    var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
+    
+    var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupCaptureSession()
+        setupDevice()
+        setupInputOutput()
+        setupPreviewLayer()
+        startRunningCaptureSession()
         // Do any additional setup after loading the view, typically from a nib.
+    }
     
+    func setupCaptureSession() {
+        captureSession.sessionPreset = AVCaptureSession.Preset.photo
+    }
+    
+    func setupDevice() {
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.unspecified)
+        let devices = deviceDiscoverySession.devices
+        
+        for device in devices {
+            if device.position == AVCaptureDevice.Position.back {
+                backCamera = device
+            } else if device.position == AVCaptureDevice.Position.front {
+                frontCamera = device
+            }
+        }
+        
+        currentCamera = backCamera
+    }
+    
+    func setupInputOutput() {
+        do {
+            let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
+            captureSession.addInput(captureDeviceInput)
+            photoOutput = AVCapturePhotoOutput()
+            photoOutput?.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])], completionHandler: nil)
+            captureSession.addOutput(photoOutput!)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func setupPreviewLayer() {
+        cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        cameraPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+        cameraPreviewLayer?.frame = self.view.frame
+        self.view.layer.insertSublayer(cameraPreviewLayer!, at: 0)
+    }
+    
+    func startRunningCaptureSession() {
+        captureSession.startRunning()
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,26 +79,24 @@ class CameraViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func cameraButtonTapped(_ sender: Any) {
+        let settings = AVCapturePhotoSettings()
+        photoOutput?.capturePhoto(with: settings, delegate: self)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier else {return}
-        
-        if identifier == "toLandmarkInfo" {
-            print("Transitioning to info page")
-            LandmarkInfoService.getInformation(for: "Golden Gate Bridge") { information in
-                if let info = information {
-                    let destination = segue.destination as! LandmarkInfoViewController
-                    destination.info = info
-                }
-            }
+        if segue.identifier == "toLandmarkInfo" {
+            let landmarkInfoViewController = segue.destination as! LandmarkInfoViewController
+            landmarkInfoViewController.landmark = "Golden Gate Bridge"
         }
     }
-    
-    
-    @IBAction func testSegueButtonTapped(_ sender: UIButton) {
-        
-    }
-    
-
 }
 
+extension CameraViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if let imageData = photo.fileDataRepresentation() {
+            image = UIImage(data: imageData)
+            performSegue(withIdentifier: "toLandmarkInfo", sender: nil)
+        }
+    }
+}

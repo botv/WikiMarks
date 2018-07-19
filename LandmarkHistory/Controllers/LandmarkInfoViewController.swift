@@ -12,7 +12,7 @@ import UIKit
 import Kingfisher
 
 class LandmarkInfoViewController: UIViewController {
-    
+    var landmark: String?
     
     @IBOutlet weak var landmarkImage: UIImageView!
     @IBOutlet weak var infoTableView: UITableView!
