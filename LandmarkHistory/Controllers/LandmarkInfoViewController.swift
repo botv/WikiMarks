@@ -20,6 +20,7 @@ class LandmarkInfoViewController: UIViewController {
     var info: [String: Any]?
     var cellLengths = [Int]()
     var cellWidth: Int?
+    var landmark: String?
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -33,6 +34,13 @@ class LandmarkInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let landmark = landmark {
+            LandmarkInfoService.getInformation(for: landmark) { information in
+                if let information = information {
+                    self.info = information
+                }
+            }
+        }
         if var info = info,
             let url = info["image"],
             let title = info["Official name"],
@@ -58,7 +66,7 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
         newInfo.removeValue(forKey: "image")
         newInfo.removeValue(forKey: "Official name")
         newInfo.removeValue(forKey: "Coordinates")
-        return newInfo.count
+        return newInfo.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,8 +83,18 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
                 newInfo.removeValue(forKey: "image")
                 newInfo.removeValue(forKey: "Coordinates")
                 newInfo.removeValue(forKey: "Official name")
-                if let value = Array(newInfo)[indexPath.row].value as? String {
-                    cell.infoTitle.text = Array(newInfo)[indexPath.row].key
+                let infoArr = Array(newInfo)
+                if indexPath.row == infoArr.count {
+                    let wikiCell = tableView.dequeueReusableCell(withIdentifier: "WikilinkCell") as! WikilinkCell
+                    if let landmark = landmark {
+                        wikiCell.wikiLinkLabel.text = LandmarkInfoService.getWikiLink(for: landmark)
+                    } else {
+                        wikiCell.wikiLinkLabel.text = "Not Found"
+                    }
+                    return wikiCell
+                }
+                if let value = infoArr[indexPath.row - 1].value as? String {
+                    cell.infoTitle.text = infoArr[indexPath.row - 1].key
                     cell.infoLabel.text = value
                     cell.infoLabel.lineBreakMode = .byWordWrapping
                     let pixels = measureText(value, font: cell.infoLabel.font)
@@ -90,8 +108,18 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        var newInfo: [String: Any]?
+        if var newInfoTemp = info {
+            newInfoTemp.removeValue(forKey: "image")
+            newInfoTemp.removeValue(forKey: "Coordinates")
+            newInfoTemp.removeValue(forKey: "Official name")
+            newInfo = newInfoTemp
+        }
         if indexPath.row == 0 {
             return 200
+        } else if let newerInfo = newInfo,
+            indexPath.row == Array(newerInfo).count {
+            return 60
         } else {
             return CGFloat(67 + ceil(Double(cellLengths[indexPath.row]) / Double(cellWidth!)) * 20)
         }

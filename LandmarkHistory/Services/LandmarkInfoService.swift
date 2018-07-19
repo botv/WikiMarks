@@ -11,8 +11,13 @@ import SwiftSoup
 
 class LandmarkInfoService {
     
-    static func getInformation(for landmark: String, completion: @escaping ([String: Any]?) -> Void) {
+    static func getWikiLink(for landmark: String) -> String {
         let requestLink = "https://en.wikipedia.org/wiki/" + landmark.replacingOccurrences(of: " ", with: "_")
+        return requestLink
+    }
+    
+    static func getInformation(for landmark: String, completion: @escaping ([String: Any]?) -> Void) {
+        let requestLink = getWikiLink(for: landmark)
         guard let myURL = URL(string: requestLink) else {
             print("Error: \(requestLink) doesn't seem to be a valid URL")
             completion(nil)

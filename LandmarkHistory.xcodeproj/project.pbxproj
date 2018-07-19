@@ -18,6 +18,7 @@
 		BE5481FC20FD093500FFFFC6 /* LandmarkInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5481FB20FD093500FFFFC6 /* LandmarkInfoViewController.swift */; };
 		FA18945120FF0A5C00357F2D /* ImageWindowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */; };
 		FA18945320FF111B00357F2D /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18945220FF111B00357F2D /* InfoCell.swift */; };
+		FA372DE62100EC3D008B58CD /* WikilinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA372DE52100EC3D008B58CD /* WikilinkCell.swift */; };
 		FABE11D920FD377D007C79EE /* LandmarkInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE11D820FD377D007C79EE /* LandmarkInfoService.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		F58CD7CCCE33DFF39D218C43 /* Pods-LandmarkHistory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LandmarkHistory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LandmarkHistory/Pods-LandmarkHistory.debug.xcconfig"; sourceTree = "<group>"; };
 		FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWindowCell.swift; sourceTree = "<group>"; };
 		FA18945220FF111B00357F2D /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
+		FA372DE52100EC3D008B58CD /* WikilinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikilinkCell.swift; sourceTree = "<group>"; };
 		FABE11D820FD377D007C79EE /* LandmarkInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkInfoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 			children = (
 				FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */,
 				FA18945220FF111B00357F2D /* InfoCell.swift */,
+				FA372DE52100EC3D008B58CD /* WikilinkCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				844EF41320FD0485005F6A91 /* AppDelegate.swift in Sources */,
 				84D924EF20FD176800100209 /* MLKitService.swift in Sources */,
 				FA18945320FF111B00357F2D /* InfoCell.swift in Sources */,
+				FA372DE62100EC3D008B58CD /* WikilinkCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
