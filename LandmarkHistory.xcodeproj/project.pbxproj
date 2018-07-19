@@ -18,7 +18,6 @@
 		BE5481FC20FD093500FFFFC6 /* LandmarkInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5481FB20FD093500FFFFC6 /* LandmarkInfoViewController.swift */; };
 		FA18945120FF0A5C00357F2D /* ImageWindowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */; };
 		FA18945320FF111B00357F2D /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18945220FF111B00357F2D /* InfoCell.swift */; };
-		FA18945520FFFB4900357F2D /* LongInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18945420FFFB4900357F2D /* LongInfoCell.swift */; };
 		FABE11D920FD377D007C79EE /* LandmarkInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABE11D820FD377D007C79EE /* LandmarkInfoService.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +37,6 @@
 		F58CD7CCCE33DFF39D218C43 /* Pods-LandmarkHistory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LandmarkHistory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LandmarkHistory/Pods-LandmarkHistory.debug.xcconfig"; sourceTree = "<group>"; };
 		FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWindowCell.swift; sourceTree = "<group>"; };
 		FA18945220FF111B00357F2D /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
-		FA18945420FFFB4900357F2D /* LongInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongInfoCell.swift; sourceTree = "<group>"; };
 		FABE11D820FD377D007C79EE /* LandmarkInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkInfoService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,7 +142,6 @@
 			children = (
 				FA18945020FF0A5C00357F2D /* ImageWindowCell.swift */,
 				FA18945220FF111B00357F2D /* InfoCell.swift */,
-				FA18945420FFFB4900357F2D /* LongInfoCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,7 +276,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE5481FC20FD093500FFFFC6 /* LandmarkInfoViewController.swift in Sources */,
-				FA18945520FFFB4900357F2D /* LongInfoCell.swift in Sources */,
 				FA18945120FF0A5C00357F2D /* ImageWindowCell.swift in Sources */,
 				844EF41520FD0485005F6A91 /* CameraViewController.swift in Sources */,
 				FABE11D920FD377D007C79EE /* LandmarkInfoService.swift in Sources */,

@@ -18,7 +18,8 @@ class LandmarkInfoViewController: UIViewController {
     @IBOutlet weak var infoTableView: UITableView!
     @IBOutlet weak var landmarkTitle: UILabel!
     var info: [String: Any]?
-    var cellTypes = [String]()
+    var cellLengths = [Int]()
+    var cellWidth: Int?
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -56,13 +57,14 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
         guard var newInfo = info else { return 0 }
         newInfo.removeValue(forKey: "image")
         newInfo.removeValue(forKey: "Official name")
+        newInfo.removeValue(forKey: "Coordinates")
         return newInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageWindowCell") as! ImageWindowCell
-            cellTypes.append("image")
+            cellLengths.append(0)
             
             
             return cell
@@ -71,22 +73,18 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
             
             if var newInfo = info {
                 newInfo.removeValue(forKey: "image")
+                newInfo.removeValue(forKey: "Coordinates")
                 newInfo.removeValue(forKey: "Official name")
                 if let value = Array(newInfo)[indexPath.row].value as? String {
-                    if value.count <= 20 {
-                        cell.infoTitle.text = Array(newInfo)[indexPath.row].key
-                        cell.infoLabel.text = value
-                        cellTypes.append("short")
-                    } else {
-                        let longCell = tableView.dequeueReusableCell(withIdentifier: "LongInfoCell") as! LongInfoCell
-                        longCell.infoTitle.text = Array(newInfo)[indexPath.row].key
-                        longCell.infoLabel.text = value
-                        cellTypes.append("long")
-                        return longCell
-                    }
+                    cell.infoTitle.text = Array(newInfo)[indexPath.row].key
+                    cell.infoLabel.text = value
+                    cell.infoLabel.lineBreakMode = .byWordWrapping
+                    let pixels = measureText(value, font: cell.infoLabel.font)
+                    cellWidth = cellWidth ?? Int(cell.infoLabel.frame.size.width)
+                    cell.infoLabel.numberOfLines = Int(ceil(Double(pixels) / Double(cellWidth!)))
+                    cellLengths.append(Int(pixels))
                 }
             }
-            
             return cell
         }
     }
@@ -95,12 +93,14 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
         if indexPath.row == 0 {
             return 200
         } else {
-            if cellTypes[indexPath.row] == "long" {
-                return 120
-            } else {
-                return 77
-            }
+            return CGFloat(67 + ceil(Double(cellLengths[indexPath.row]) / Double(cellWidth!)) * 20)
         }
+    }
+    
+    private func measureText(_ text: String, font: UIFont) -> CGFloat {
+        let fontAttributes = [NSAttributedStringKey.font: font]
+        let size = (text as NSString).size(withAttributes: fontAttributes)
+        return size.width
     }
 }
 
