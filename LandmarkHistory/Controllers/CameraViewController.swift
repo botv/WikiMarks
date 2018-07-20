@@ -134,6 +134,23 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
             image = UIImage(data: imageData)
             MLService.evaluateImage(for: image!) { landmarks in
                 self.activityIndicator.isHidden = true
+                guard let landmarks = landmarks else {
+                    let alert = UIAlertController(title: "Request Failed", message: "The request to evaluate your image failed. Check your internet connection and try again.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        switch action.style{
+                        case .default:
+                            print("default")
+                            
+                        case .cancel:
+                            print("cancel")
+                            
+                        case .destructive:
+                            print("destructive")
+                        }}))
+                    self.present(alert, animated: true, completion: nil)
+                    self.findingLandmark = false
+                    return
+                }
                 if landmarks.isEmpty {
                     print("no landmarks found")
                     let alert = UIAlertController(title: "No Landmark Found", message: "No landmark was found in your photo. Try to take a clearer picture and get more of the landmark in the frame.", preferredStyle: UIAlertControllerStyle.alert)
