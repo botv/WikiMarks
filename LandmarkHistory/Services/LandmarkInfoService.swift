@@ -38,23 +38,14 @@ class LandmarkInfoService {
                     key = removeRefs(from: key)
                     value = removeRefs(from: value)
                     
-                    key = key.replacingOccurrences(of: "â¢", with: "")
-                    value = value.replacingOccurrences(of: "â¢", with: "")
-                    
-                    key = key.replacingOccurrences(of: "â¢ ", with: "")
-                    value = value.replacingOccurrences(of: "â¢ ", with: "")
+                    key = stripChar("â¢", from: key, andSpaces: true)
+                    value = stripChar("â¢", from: value, andSpaces: true)
                     
                     key = key.replacingOccurrences(of: "â", with: "-")
                     value = value.replacingOccurrences(of: "â", with: "-")
                     
-                    key = key.replacingOccurrences(of: "â ", with: "- ")
-                    value = value.replacingOccurrences(of: "â ", with: "- ")
-                    
                     key = key.replacingOccurrences(of: "Ã©", with: "é")
                     value = value.replacingOccurrences(of: "Ã©", with: "é")
-                    
-                    key = key.replacingOccurrences(of: "Ã© ", with: "é ")
-                    value = value.replacingOccurrences(of: "Ã© ", with: "é ")
                     
                     if key != "" && value != "" {
                         if info[key] == nil {
@@ -119,6 +110,17 @@ class LandmarkInfoService {
             ind += 1
         }
         return str
+    }
+    
+    static private func stripChar(_ char: String, from str: String, andSpaces: Bool = false) -> String {
+        var newStr = str
+        if andSpaces {
+            newStr = newStr.replacingOccurrences(of: char + " ", with: "")
+        }
+        
+        newStr = newStr.replacingOccurrences(of: char, with: "")
+        
+        return newStr
     }
     
 }
