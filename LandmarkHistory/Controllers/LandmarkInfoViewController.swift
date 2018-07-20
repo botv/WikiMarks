@@ -14,14 +14,14 @@ import Kingfisher
 class LandmarkInfoViewController: UIViewController {
     var landmark: String?
     
-    @IBOutlet weak var landmarkImage: UIImageView!
     @IBOutlet weak var infoTableView: UITableView!
     @IBOutlet weak var landmarkTitle: UILabel!
     @IBOutlet weak var landmarkTitleView: UIView!
     var info: [String: Any]?
+    var landmarkImage: UIImage?
+    var landmarkImageURL: URL?
     var cellLengths = [Int]()
     var cellWidth: Int?
-    var themeColor: UIColor?
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -35,16 +35,8 @@ class LandmarkInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let gradient: CAGradientLayer = CAGradientLayer()
         
-        let color = themeColor?.cgColor ?? UIColor.white.cgColor
-        gradient.colors = [color, color.copy(alpha: 0)]
-        gradient.locations = [0.57 , 0.9]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.frame = CGRect(x: 0.0, y: 0.0, width: landmarkTitle.frame.size.width, height: landmarkTitleView.frame.size.height)
-        
-        landmarkTitleView.layer.insertSublayer(gradient, at: 0)
+        infoTableView.separatorStyle = .none
         
         if let landmark = landmark {
             LandmarkInfoService.getInformation(for: landmark) { information in
@@ -53,21 +45,16 @@ class LandmarkInfoViewController: UIViewController {
                 }
             }
         }
+        print(info)
         if var info = info,
             let url = info["image"],
             let title = landmark {
             landmarkTitle.text = title
             guard let imageURL = URL(string: url as! String) else { return }
-            landmarkImage.kf.setImage(with: imageURL)
-//            var img: UIImage? = nil
-//            KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil) {image, error, cacheType, imageURL in
-//                img = image
-//            }
-//            if let img = img {
-//                let scaleFactor = CGFloat(UIScreen.main.bounds.width) / CGFloat(img.size.width)
-//                landmarkImage.frame = CGRect (x: 0, y: 62, width: (scaleFactor * img.size.width)/2, height: (scaleFactor * img.size.height)/2)
-//                landmarkImage.image = img
-//            }
+            KingfisherManager.shared.retrieveImage(with: imageURL, options: nil, progressBlock: nil) {image, error, cacheType, imageURL in
+                self.landmarkImage = image
+                self.landmarkImageURL = imageURL
+            }
         }
     }
 }
@@ -86,11 +73,28 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
         return newInfo.count + 1
     }
     
+    private func loadImage(in cell: ImageWindowCell) {
+        print("tried")
+        if let _ = landmarkImageURL {
+            self.infoTableView.reloadData()
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.loadImage(in: cell)
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImageWindowCell") as! ImageWindowCell
-            cellLengths.append(0)
             
+            if let imgURL = landmarkImageURL {
+                cell.landmarkImageView.kf.setImage(with: imgURL)
+            } else {
+                loadImage(in: cell)
+            }
+            
+            cellLengths.append(0)
             
             return cell
         } else {
@@ -133,7 +137,12 @@ extension LandmarkInfoViewController : UITableViewDataSource, UITableViewDelegat
             newInfo = newInfoTemp
         }
         if indexPath.row == 0 {
-            return 500
+            if let img = landmarkImage {
+                let scaleFactor = CGFloat(UIScreen.main.bounds.width) / CGFloat(img.size.width)
+                return CGFloat(scaleFactor * CGFloat(img.size.height))
+            } else {
+                return 200
+            }
         } else if let newerInfo = newInfo,
             indexPath.row == Array(newerInfo).count {
             return 60

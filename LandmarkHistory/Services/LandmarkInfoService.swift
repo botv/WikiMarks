@@ -27,7 +27,7 @@ class LandmarkInfoService {
             var info = [String: Any]()
             let html = try String(contentsOf: myURL, encoding: .ascii)
             let doc: Document = try! SwiftSoup.parse(html)
-            let table: Element? = try doc.select("table.infobox.vcard").first()
+            let table: Element? = try doc.select("table.infobox").first()
             if let table = table,
                 let infobox = try table.select("tbody").first() {
                 // Get info
@@ -62,7 +62,6 @@ class LandmarkInfoService {
                     info["image"] = "https:" + imgURL
                 }
             }
-            
             completion(info)
         } catch let error {
             print(error.localizedDescription)

@@ -60,10 +60,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jqd-eH-9Jv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PCH-9k-hGm">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,9 +70,24 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jk7-GV-Nsf" id="ZEi-Cz-gRw">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="121.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jqd-eH-9Jv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="121.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Jqd-eH-9Jv" secondAttribute="bottom" id="0Jw-YC-R30"/>
+                                                <constraint firstItem="Jqd-eH-9Jv" firstAttribute="top" secondItem="ZEi-Cz-gRw" secondAttribute="top" id="9tN-ZT-2qt"/>
+                                                <constraint firstItem="Jqd-eH-9Jv" firstAttribute="leading" secondItem="ZEi-Cz-gRw" secondAttribute="leading" id="Njw-vf-aiG"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jqd-eH-9Jv" secondAttribute="trailing" id="dXF-N1-FdK"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="landmarkImageView" destination="Jqd-eH-9Jv" id="8xG-UP-qbs"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoCell" rowHeight="97" id="2Ci-kK-Nk8" customClass="InfoCell" customModule="LandmarkHistory" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="150" width="375" height="97"/>
@@ -93,25 +104,34 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="fpN-bI-4Tf"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="24"/>
+                                                            <color key="textColor" red="1" green="0.71372549019607845" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Lh-xC-sfx">
-                                                            <rect key="frame" x="0.0" y="30" width="345" height="45"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="0.0" y="30" width="345" height="44"/>
+                                                            <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="19"/>
+                                                            <color key="textColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFc-3A-1Aw">
+                                                            <rect key="frame" x="0.0" y="74" width="345" height="1"/>
+                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="8aY-Ue-mRq"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="pxF-6l-vlh" firstAttribute="width" secondItem="3Lh-xC-sfx" secondAttribute="width" id="IFR-30-CLk"/>
+                                                        <constraint firstAttribute="bottom" secondItem="nFc-3A-1Aw" secondAttribute="bottom" id="Nne-ls-P95"/>
                                                         <constraint firstItem="pxF-6l-vlh" firstAttribute="top" secondItem="dOU-1A-6IC" secondAttribute="top" id="nU3-6t-0ny"/>
                                                         <constraint firstItem="3Lh-xC-sfx" firstAttribute="top" secondItem="pxF-6l-vlh" secondAttribute="bottom" id="sFl-UR-mnd"/>
                                                         <constraint firstItem="pxF-6l-vlh" firstAttribute="leading" secondItem="dOU-1A-6IC" secondAttribute="leading" id="wiq-AH-7kX"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.14965587797619045" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="dOU-1A-6IC" firstAttribute="top" secondItem="S03-hb-7ko" secondAttribute="topMargin" id="2XL-Xg-tJh"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="dOU-1A-6IC" secondAttribute="trailing" id="Cpk-Ug-Puw"/>
@@ -139,8 +159,8 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="Z7c-pm-AkU"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="20"/>
+                                                            <color key="textColor" red="1" green="0.71383928569999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xT-5r-NoH">
@@ -162,6 +182,7 @@
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.095424107142857137" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="3ac-i9-WWe" firstAttribute="top" secondItem="myq-zK-GqS" secondAttribute="topMargin" id="NSM-Sn-0kG"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="3ac-i9-WWe" secondAttribute="trailing" id="Rnv-ql-tUU"/>
@@ -181,47 +202,42 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EnZ-PS-Yot">
-                                <rect key="frame" x="0.0" y="59" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="59" width="375" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48v-kc-fUU">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="bCM-KY-uCz"/>
+                                            <constraint firstAttribute="height" constant="60" id="bCM-KY-uCz"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
-                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="33"/>
+                                        <color key="textColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.14999999999999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="48v-kc-fUU" firstAttribute="top" secondItem="EnZ-PS-Yot" secondAttribute="top" id="AdY-YP-pxE"/>
                                     <constraint firstAttribute="trailing" secondItem="48v-kc-fUU" secondAttribute="trailing" id="GiU-MU-0Ud"/>
-                                    <constraint firstAttribute="height" constant="70" id="ffq-6y-dEg"/>
+                                    <constraint firstAttribute="height" constant="60" id="ffq-6y-dEg"/>
                                     <constraint firstItem="48v-kc-fUU" firstAttribute="leading" secondItem="EnZ-PS-Yot" secondAttribute="leading" id="pdv-gA-7Ff"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.14965587799999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="JCk-TS-guy" firstAttribute="trailing" secondItem="EnZ-PS-Yot" secondAttribute="trailing" id="6oJ-2x-Q7i"/>
                             <constraint firstItem="PCH-9k-hGm" firstAttribute="trailing" secondItem="JCk-TS-guy" secondAttribute="trailing" id="7yQ-nX-kdP"/>
                             <constraint firstItem="PCH-9k-hGm" firstAttribute="top" secondItem="kIp-Ct-kL5" secondAttribute="top" id="EcF-YN-uX4"/>
-                            <constraint firstItem="Jqd-eH-9Jv" firstAttribute="top" secondItem="JCk-TS-guy" secondAttribute="top" id="HkX-Qm-h4c"/>
                             <constraint firstItem="JCk-TS-guy" firstAttribute="bottom" secondItem="PCH-9k-hGm" secondAttribute="bottom" id="OnR-jI-FrH"/>
-                            <constraint firstItem="JCk-TS-guy" firstAttribute="bottom" secondItem="Jqd-eH-9Jv" secondAttribute="bottom" id="Y72-15-aOt"/>
                             <constraint firstItem="EnZ-PS-Yot" firstAttribute="leading" secondItem="JCk-TS-guy" secondAttribute="leading" id="jDL-75-Cnm"/>
                             <constraint firstItem="EnZ-PS-Yot" firstAttribute="top" secondItem="JCk-TS-guy" secondAttribute="top" constant="-5" id="myl-bK-g8R"/>
                             <constraint firstItem="PCH-9k-hGm" firstAttribute="leading" secondItem="JCk-TS-guy" secondAttribute="leading" id="n7F-Qv-Gdt"/>
-                            <constraint firstItem="Jqd-eH-9Jv" firstAttribute="leading" secondItem="JCk-TS-guy" secondAttribute="leading" id="qKX-pA-1zI"/>
-                            <constraint firstItem="Jqd-eH-9Jv" firstAttribute="trailing" secondItem="JCk-TS-guy" secondAttribute="trailing" id="s7m-A7-YIU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JCk-TS-guy"/>
                     </view>
                     <connections>
                         <outlet property="infoTableView" destination="PCH-9k-hGm" id="yj6-NH-qGB"/>
-                        <outlet property="landmarkImage" destination="Jqd-eH-9Jv" id="n2Y-gj-i13"/>
                         <outlet property="landmarkTitle" destination="48v-kc-fUU" id="xkp-xK-0qP"/>
                         <outlet property="landmarkTitleView" destination="EnZ-PS-Yot" id="cw0-Nj-Nc3"/>
                     </connections>
@@ -235,9 +251,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7wL-Ou-8eP" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WAw-dF-NcA">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="WAw-dF-NcA">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.23157552079999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

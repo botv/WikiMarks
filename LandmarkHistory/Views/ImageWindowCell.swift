@@ -8,6 +8,7 @@
 import UIKit
 
 class ImageWindowCell: UITableViewCell {
+    @IBOutlet weak var landmarkImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
