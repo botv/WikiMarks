@@ -39,6 +39,7 @@ class LandmarkInfoViewController: UIViewController {
         infoTableView.separatorStyle = .none
         infoTableView.allowsSelection = false
         self.navigationController?.isNavigationBarHidden = false
+        self.infoTableView.bounces = false;
         
         if let landmark = landmark {
             LandmarkInfoService.getInformation(for: landmark) { information in

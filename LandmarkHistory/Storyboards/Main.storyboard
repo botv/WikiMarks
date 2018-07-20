@@ -81,7 +81,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PCH-9k-hGm">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="119" width="375" height="548"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImageWindowCell" focusStyle="custom" rowHeight="122" id="jk7-GV-Nsf" customClass="ImageWindowCell" customModule="LandmarkHistory" customModuleProvider="target">
@@ -248,7 +248,7 @@
                         <constraints>
                             <constraint firstItem="JCk-TS-guy" firstAttribute="trailing" secondItem="EnZ-PS-Yot" secondAttribute="trailing" id="6oJ-2x-Q7i"/>
                             <constraint firstItem="PCH-9k-hGm" firstAttribute="trailing" secondItem="JCk-TS-guy" secondAttribute="trailing" id="7yQ-nX-kdP"/>
-                            <constraint firstItem="PCH-9k-hGm" firstAttribute="top" secondItem="kIp-Ct-kL5" secondAttribute="top" id="EcF-YN-uX4"/>
+                            <constraint firstItem="PCH-9k-hGm" firstAttribute="top" secondItem="EnZ-PS-Yot" secondAttribute="bottom" id="EcF-YN-uX4"/>
                             <constraint firstItem="JCk-TS-guy" firstAttribute="bottom" secondItem="PCH-9k-hGm" secondAttribute="bottom" id="OnR-jI-FrH"/>
                             <constraint firstItem="EnZ-PS-Yot" firstAttribute="leading" secondItem="JCk-TS-guy" secondAttribute="leading" id="jDL-75-Cnm"/>
                             <constraint firstItem="EnZ-PS-Yot" firstAttribute="top" secondItem="JCk-TS-guy" secondAttribute="top" constant="-5" id="myl-bK-g8R"/>

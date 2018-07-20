@@ -41,11 +41,20 @@ class LandmarkInfoService {
                     key = key.replacingOccurrences(of: "â¢", with: "")
                     value = value.replacingOccurrences(of: "â¢", with: "")
                     
+                    key = key.replacingOccurrences(of: "â¢ ", with: "")
+                    value = value.replacingOccurrences(of: "â¢ ", with: "")
+                    
                     key = key.replacingOccurrences(of: "â", with: "-")
                     value = value.replacingOccurrences(of: "â", with: "-")
                     
+                    key = key.replacingOccurrences(of: "â ", with: "- ")
+                    value = value.replacingOccurrences(of: "â ", with: "- ")
+                    
                     key = key.replacingOccurrences(of: "Ã©", with: "é")
                     value = value.replacingOccurrences(of: "Ã©", with: "é")
+                    
+                    key = key.replacingOccurrences(of: "Ã© ", with: "é ")
+                    value = value.replacingOccurrences(of: "Ã© ", with: "é ")
                     
                     if key != "" && value != "" {
                         if info[key] == nil {
