@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 
 class CameraViewController: UIViewController {
+    @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var captureSession = AVCaptureSession()
     var backCamera: AVCaptureDevice?
@@ -31,6 +33,32 @@ class CameraViewController: UIViewController {
         setupPreviewLayer()
         startRunningCaptureSession()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+        
+        self.activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        self.activityIndicator.isHidden = true
+        self.activityIndicator.stopAnimating()
+        
+        instructionsLabel.attributedText = NSMutableAttributedString(string: "Take a picture of a landmark to learn about it.", attributes: stroke(strokeWidth: 1, insideColor: .white, strokeColor: .black))
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            UIView.animate(withDuration: 2, animations: {
+                self.instructionsLabel.alpha = 0
+            }, completion: nil)
+        }
+    }
+    
+    private func stroke(strokeWidth: Float, insideColor: UIColor, strokeColor: UIColor) -> [NSAttributedStringKey: Any]{
+        return [
+            NSAttributedStringKey.strokeColor : strokeColor,
+            NSAttributedStringKey.foregroundColor : insideColor,
+            NSAttributedStringKey.strokeWidth : -strokeWidth
+        ]
     }
     
     func setupCaptureSession() {
@@ -84,6 +112,8 @@ class CameraViewController: UIViewController {
     @IBAction func cameraButtonTapped(_ sender: Any) {
         if (!findingLandmark) {
             print("processing")
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
             findingLandmark = true;
             let settings = AVCapturePhotoSettings()
             photoOutput?.capturePhoto(with: settings, delegate: self)
@@ -103,14 +133,29 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         if let imageData = photo.fileDataRepresentation() {
             image = UIImage(data: imageData)
             MLService.evaluateImage(for: image!) { landmarks in
+                self.activityIndicator.isHidden = true
                 if landmarks.isEmpty {
                     print("no landmarks found")
+                    let alert = UIAlertController(title: "No Landmark Found", message: "No landmark was found in your photo. Try to take a clearer picture and get more of the landmark in the frame.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        switch action.style{
+                        case .default:
+                            print("default")
+                            
+                        case .cancel:
+                            print("cancel")
+                            
+                        case .destructive:
+                            print("destructive")
+                        }}))
+                    self.present(alert, animated: true, completion: nil)
                     self.findingLandmark = false
                     return
                 }
                 
                 self.landmark = landmarks[0].landmark
                 print("landmark found: " + self.landmark!)
+                self.activityIndicator.stopAnimating()
                 
                 self.performSegue(withIdentifier: "toLandmarkInfo", sender: nil)
                 self.findingLandmark = false

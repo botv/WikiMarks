@@ -19,25 +19,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hq1-2A-Z28">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hq1-2A-Z28">
                                 <rect key="frame" x="157" y="587" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.99404761904761907" green="0.98809523809523814" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="tca-xA-XVe"/>
                                     <constraint firstAttribute="width" constant="60" id="xMk-uS-ks0"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <state key="normal" image="buttonDefault"/>
+                                <state key="selected" image="buttonPressed"/>
                                 <connections>
                                     <action selector="cameraButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mnV-eY-N70"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85b-fd-k1X">
+                                <rect key="frame" x="24" y="335.5" width="327" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Ce3-6N-OzN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="u4u-sn-wTa">
+                                <rect key="frame" x="167" y="345.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="1OJ-Nw-6Nb"/>
+                                    <constraint firstAttribute="height" constant="40" id="e4L-TZ-B0v"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="85b-fd-k1X" secondAttribute="trailing" constant="24" id="7rT-AJ-1gv"/>
+                            <constraint firstItem="85b-fd-k1X" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="CGX-RQ-b8w"/>
+                            <constraint firstItem="85b-fd-k1X" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Np1-WF-DIb"/>
+                            <constraint firstItem="u4u-sn-wTa" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Nz2-bR-j9r"/>
+                            <constraint firstItem="u4u-sn-wTa" firstAttribute="centerX" secondItem="85b-fd-k1X" secondAttribute="centerX" id="bBo-6I-a3n"/>
                             <constraint firstItem="hq1-2A-Z28" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hm1-XH-4pz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hq1-2A-Z28" secondAttribute="bottom" constant="20" id="xix-6d-RQF"/>
                         </constraints>
@@ -45,6 +63,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Eme-Ey-uOF"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="u4u-sn-wTa" id="Uqr-aP-pow"/>
+                        <outlet property="instructionsLabel" destination="85b-fd-k1X" id="QhU-Mt-u80"/>
                         <segue destination="RRa-EW-t1c" kind="show" identifier="toLandmarkInfo" id="V0f-WN-ISd"/>
                     </connections>
                 </viewController>
@@ -182,7 +202,7 @@
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.095424107142857137" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.14969308035714285" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="3ac-i9-WWe" firstAttribute="top" secondItem="myq-zK-GqS" secondAttribute="topMargin" id="NSM-Sn-0kG"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="3ac-i9-WWe" secondAttribute="trailing" id="Rnv-ql-tUU"/>
@@ -255,6 +275,7 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.23157552079999999" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -266,4 +287,8 @@
             <point key="canvasLocation" x="-121" y="31"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="buttonDefault" width="1600" height="1600"/>
+        <image name="buttonPressed" width="1600" height="1600"/>
+    </resources>
 </document>

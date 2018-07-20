@@ -37,6 +37,8 @@ class LandmarkInfoViewController: UIViewController {
         super.viewWillAppear(animated)
         
         infoTableView.separatorStyle = .none
+        infoTableView.allowsSelection = false
+        self.navigationController?.isNavigationBarHidden = false
         
         if let landmark = landmark {
             LandmarkInfoService.getInformation(for: landmark) { information in
@@ -45,7 +47,6 @@ class LandmarkInfoViewController: UIViewController {
                 }
             }
         }
-        print(info)
         if var info = info,
             let url = info["image"],
             let title = landmark {
